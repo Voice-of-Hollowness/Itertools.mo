@@ -1378,8 +1378,67 @@ module {
     ///
     ///     assert text == "abc";
     /// ```
-    public func toText(charIter: Iter.Iter<Char>): Text{
+    public func toText<>(charIter: Iter.Iter<Char>): Text{
         let textIter = Iter.map<Char, Text>(charIter, func(c){Char.toText(c)});
         Text.join("", textIter);
     };
+
+    ///
+    ///
+    ///
+    ///
+    ///
+    ///
+    ///
+    ///
+    ///
+    ///
+
+    public func isSorted<A>(iter: Iter.Iter<A>, cmp : (A, A) -> Order):Bool{
+        let size = iter.size();
+        if (size <= 1) return true;
+
+        var i = 0;
+        var minToMax : Int = 0;
+
+        while (i < size-1){
+                if(Order.isGreater(f(iter[i], iter[i+1]))){ 
+                  return false;
+                };
+                i += 1;
+            };
+        switch(minToMax){
+                
+                case (1){
+                    if(Order.isGreater(f(iter[i], iter[i+1]))){ 
+                        return false;
+                    };
+                i += 1;
+                };
+                case (-1){
+                   if(Order.isLess(f(iter[i], iter[i+1]))){ 
+                        return false;
+                    };
+                i += 1;
+                };
+                case (0) {
+                    if (cmp(iter[i], iter[i+1]) ==  #less ){
+                        i=+1;
+                        minToMax := 1;
+                    }else if (cmp(iter[i], iter[i+1]) == #greater ){
+                        i=+1;
+                        minToMax := -1;
+                    }
+                    else if (cmp(iter[i], iter[i+1]) ==  #equal ){
+                        i=+1;
+                    }
+                };
+            }
+
+        return true;
+
+//        I couldn`t make it run and I accidentely cut the internet off. So yeah have a great time)
+    }
+
+
 }

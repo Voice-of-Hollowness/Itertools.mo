@@ -561,6 +561,33 @@ let success = run([
 
             assertTrue( text == "abc" )
         }),
+        
+        describe("isSorted", [
+            it("is Sorted from min to max values", do{
+                let vals = [4, 4, 6, 8, 9].vals();
+                let sorted = Itertools.isSorted(vals, Nat.compare);
+        
+                assertTrue(sorted == true)
+            }),
+            it("is Sorted from max to min values", do{
+                let vals = [9, 8, 8, 6, 4].vals();
+                let sorted = Itertools.isSorted(vals, Nat.compare);
+        
+                assertTrue(sorted == true)
+            }),
+            it("is empty sorted?", do{
+                let vals = [].vals();
+                let sorted = Itertools.isSorted(vals, Nat.compare);
+        
+                assertTrue(sorted == true)
+            }),
+            it("is it with one element", do{
+                let vals = [8].vals();
+                let sorted = Itertools.isSorted(vals, Nat.compare);
+        
+                assertTrue(sorted == true)
+            }),
+        ]),
     ])
 ]);
 
